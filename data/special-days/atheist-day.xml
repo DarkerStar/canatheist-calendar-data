@@ -1,0 +1,57 @@
+<vevent xmlns="urn:ietf:params:xml:ns:icalendar-2.0">
+	<properties>
+		<uid>
+			<text>aeb515c6-54cc-4396-8898-58b399c3e68c</text>
+		</uid>
+		<summary>
+			<text>Atheist Day</text>
+		</summary>
+		<summary>
+			<parameters>
+				<language>
+					<text>en-CA</text>
+				</language>
+			</parameters>
+			<text>Atheist Day</text>
+		</summary>
+		<summary>
+			<parameters>
+				<language>
+					<text>fr-CA</text>
+				</language>
+			</parameters>
+			<text>Journée de l’athée</text>
+		</summary>
+		<dtstart>
+			<date>2003-03-23</date>
+		</dtstart>
+		<duration>
+			<duration>P1D</duration>
+		</duration>
+		<rrule>
+			<recur>
+				<freq>YEARLY</freq>
+			</recur>
+		</rrule>
+		<status>
+			<text>CONFIRMED</text>
+		</status>
+		<transp>
+			<text>TRANSPARENT</text>
+		</transp>
+		<created>
+			<date-time>2021-02-27T08:19:04Z</date-time>
+		</created>
+		<last-modified>
+			<date-time>2021-02-27T08:19:04Z</date-time>
+		</last-modified>
+		<!-- Increment to signal updates
+		<sequence>
+			<integer>0</integer>
+		</sequence>
+		-->
+		<dtstamp>
+			<date-time>2021-02-27T08:19:04Z</date-time>
+		</dtstamp>
+	</properties>
+</vevent>
