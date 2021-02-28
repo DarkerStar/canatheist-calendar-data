@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Based on RELAX NG schema in Appendix A of RFC 6321 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xcal="urn:ietf:params:xml:ns:icalendar-2.0" targetNamespace="urn:ietf:params:xml:ns:icalendar-2.0" elementFormDefault="qualified">
+	<!-- # 3.2 Property Parameters -->
+	<!-- # 3.2.1 Alternate Text Representation -->
+	<!-- Folded into ... -->
+	<!-- # 3.2.2 Common Name -->
+	<!--     TBD -->
+	<!-- # 3.2.3 Calendar User Type -->
+	<!--     TBD -->
+	<!-- # 3.2.4 Delegators -->
+	<!--     TBD -->
+	<!-- # 3.2.5 Delegatees -->
+	<!--     TBD -->
+	<!-- # 3.2.6 Directory Entry Reference -->
+	<!--     TBD -->
+	<!-- # 3.2.7 Inline Encoding -->
+	<!--     TBD -->
+	<!-- # 3.2.8 Format Type -->
+	<!--     TBD -->
+	<!-- # 3.2.9 Free/Busy Time Type -->
+	<!--     TBD -->
+	<!-- # 3.2.10 Language -->
+	<!--     TBD -->
+	<!-- # 3.2.11 Group or List Membership -->
+	<!--     TBD -->
+	<!-- # 3.2.12 Participation Status -->
+	<!--     TBD -->
+	<!-- # 3.2.13 Recurrence Identifier Range -->
+	<!--     TBD -->
+	<!-- # 3.2.14 Alarm Trigger Relationship -->
+	<!--     TBD -->
+	<!-- # 3.2.15 Relationship Type -->
+	<!--     TBD -->
+	<!-- # 3.2.16 Participation Role -->
+	<!--     TBD -->
+	<!-- # 3.2.17 RSVP Expectation -->
+	<!--     TBD -->
+	<!-- # 3.2.18 Sent By -->
+	<!--     TBD -->
+	<!-- # 3.2.19 Time Zone Identifier -->
+	<!--     TBD -->
+	<!-- # 3.3 Property Value Data Types -->
+	<!-- # 3.3.1 BINARY -->
+	<!-- # 3.3.2 BOOLEAN -->
+	<!-- # 3.3.3 CAL-ADDRESS -->
+	<!-- # 3.3.4 DATE -->
+	<xs:simpleType name="PatternDate">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d\d\d\d-\d\d-\d\d"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ValueDate">
+		<xs:sequence>
+			<xs:element name="date" type="xcal:PatternDate"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.3.5 DATE-TIME -->
+	<xs:simpleType name="PatternDateTime">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\dZ?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ValueDateTime">
+		<xs:sequence>
+			<xs:element name="date-time" type="xcal:PatternDateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.3.6 DURATION -->
+	<xs:simpleType name="PatternDuration">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[-+]?P((\d+W)|(\d+D))?(T(\d+H(\d+M)?(\d+S)?)|(\d+M(\d+S)?)|(\d+S))?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ValueDuration">
+		<xs:sequence>
+			<xs:element name="duration" type="xcal:PatternDuration"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.3.7 FLOAT -->
+	<!-- # 3.3.8 INTEGER -->
+	<xs:complexType name="ValueInteger">
+		<xs:sequence>
+			<xs:element name="integer" type="xs:integer"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.3.9 PERIOD -->
+	<!-- # 3.3.10 RECUR -->
+	<xs:complexType name="ValueRecur">
+		<xs:sequence>
+			<xs:element name="freq">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="SECONDLY"/>
+						<xs:enumeration value="MINUTELY"/>
+						<xs:enumeration value="HOURLY"/>
+						<xs:enumeration value="DAILY"/>
+						<xs:enumeration value="WEEKLY"/>
+						<xs:enumeration value="MONTHLY"/>
+						<xs:enumeration value="YEARLY"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.3.11 TEXT -->
+	<xs:complexType name="ValueText">
+		<xs:sequence>
+			<xs:element name="text" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.3.12 TIME -->
+	<!-- # 3.3.13 URI -->
+	<xs:complexType name="ValueUri">
+		<xs:sequence>
+			<xs:element name="uri" type="xs:anyURI"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.3.14 UTC-OFFSET -->
+	<!-- # UNKNOWN -->
+	<!-- # 3.4 iCalendar Stream -->
+	<!--     Defined in xcal schema -->
+	<!-- # 3.6 Calendar Components -->
+	<!-- # 3.6.1 Event Component -->
+	<xs:element name="vevent">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="properties">
+					<xs:complexType>
+						<xs:all>
+							<!-- Required properties -->
+							<xs:element name="dtstamp" type="xcal:PropertyDtstamp"/>
+							<xs:element name="dtstart" type="xcal:PropertyDtstart"/>
+							<xs:element name="uid" type="xcal:PropertyUid"/>
+							<!-- General properties -->
+							<xs:element name="class" type="xs:string" minOccurs="0"/>
+							<xs:element name="created" type="xcal:PropertyCreated" minOccurs="0"/>
+							<xs:element name="description" type="xcal:PropertyDescription" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="geo" type="xs:string" minOccurs="0"/>
+							<xs:element name="last-modified" type="xcal:PropertyLastMod" minOccurs="0"/>
+							<xs:element name="location" type="xs:string" minOccurs="0"/>
+							<xs:element name="organizer" type="xs:string" minOccurs="0"/>
+							<xs:element name="priority" type="xs:string" minOccurs="0"/>
+							<xs:element name="seq" type="xcal:PropertySeq" minOccurs="0"/>
+							<xs:element name="status" type="xcal:PropertyStatusEvent" minOccurs="0"/>
+							<xs:element name="summary" type="xcal:PropertySummary" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="transp" type="xcal:PropertyTransp" minOccurs="0"/>
+							<xs:element name="url" type="xcal:PropertyUrl" minOccurs="0"/>
+							<xs:element name="recurid" type="xs:string" minOccurs="0"/>
+							<!-- Recurrence rule -->
+							<xs:element name="rrule" type="xcal:PropertyRRule" minOccurs="0"/>
+							<!-- Duration/end -->
+							<xs:element name="duration" type="xcal:PropertyDuration" minOccurs="0"/>
+							<xs:element name="dtend" type="xs:string" minOccurs="0"/>
+							<!-- Extra properties -->
+							<xs:element name="attach" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="attendee" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="categories" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="comment" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="contact" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="exdate" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="rstatus" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="related" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="resources" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="rdate" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="components" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="xcal:valarm" minOccurs="1" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
+						<xs:assert test="not(xcal:duration and xcal:dtend)"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- # 3.6.2 To-do Component -->
+	<!-- # 3.6.3 Journal Component -->
+	<!-- # 3.6.4 Free/Busy Component -->
+	<!-- # 3.6.5 Time Zone Component -->
+	<!-- # 3.6.6 Alarm Component -->
+	<xs:element name="valarm">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="properties">
+					<xs:complexType>
+						<!-- TBD -->
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- # 3.7 Calendar Properties -->
+	<!-- # 3.7.1 Calendar Scale -->
+	<!-- # 3.7.2 Method -->
+	<!-- # 3.7.3 Product Identifier -->
+	<!-- # 3.7.4 Version -->
+	<!-- # 3.8 Component Properties -->
+	<!-- # 3.8.1 Descriptive Component Properties -->
+	<!-- # 3.8.1.1 Attachment -->
+	<!-- # 3.8.1.2 Categories -->
+	<!-- # 3.8.1.3 Classification -->
+	<!-- # 3.8.1.4 Comment -->
+	<!-- # 3.8.1.5 Description -->
+	<xs:complexType name="PropertyDescription">
+		<xs:complexContent>
+			<xs:extension base="xcal:ExtraLanguageText"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- # 3.8.1.6 Geographic Position -->
+	<!-- # 3.8.1.7 Location -->
+	<!-- # 3.8.1.8 Percent Complete -->
+	<!-- # 3.8.1.9 Priority -->
+	<!-- # 3.8.1.10 Resources -->
+	<!-- # 3.8.1.11 Status -->
+	<xs:complexType name="PropertyStatusEvent">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="text">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="TENTATIVE"/>
+						<xs:enumeration value="CONFIRMED"/>
+						<xs:enumeration value="CANCELLED"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.8.1.12 Summary -->
+	<xs:complexType name="PropertySummary">
+		<xs:complexContent>
+			<xs:extension base="xcal:ExtraLanguageText"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- # 3.8.2 Date and Time Component Properties -->
+	<!-- # 3.8.2.1 Date/Time Completed -->
+	<!-- # 3.8.2.2 Date/Time End -->
+	<!-- # 3.8.2.3 Date/Time Due -->
+	<!-- # 3.8.2.4 Date/Time Start -->
+	<xs:complexType name="PropertyDtstart">
+		<xs:complexContent>
+			<xs:extension base="xcal:ExtraDateOrDateTime"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- # 3.8.2.5 Duration -->
+	<xs:complexType name="PropertyDuration">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="duration" type="xcal:PatternDuration"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.8.2.6 Free/Busy Time -->
+	<!-- # 3.8.2.7 Time Transparency -->
+	<xs:complexType name="PropertyTransp">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="text">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="OPAQUE"/>
+						<xs:enumeration value="TRANSPARENT"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.8.3 Time Zone Component Properties -->
+	<!-- # 3.8.3.1 Time Zone Identifier -->
+	<!-- # 3.8.3.2 Time Zone Name -->
+	<!-- # 3.8.3.3 Time Zone Offset From -->
+	<!-- # 3.8.3.4 Time Zone Offset To -->
+	<!-- # 3.8.3.5 Time Zone URL -->
+	<!-- # 3.8.4 Relationship Component Properties -->
+	<!-- # 3.8.4.1 Attendee -->
+	<!-- # 3.8.4.2 Contact -->
+	<!-- # 3.8.4.3 Organizer -->
+	<!-- # 3.8.4.4 Recurrence ID -->
+	<!-- # 3.8.4.5 Related-To -->
+	<!-- # 3.8.4.6 Uniform Resource Locator -->
+	<xs:complexType name="PropertyUrl">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="uri" type="xs:anyURI"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.8.4.7 Unique Identifier -->
+	<xs:complexType name="PropertyUid">
+		<xs:complexContent>
+			<xs:extension base="xcal:ExtraText"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- # 3.8.5 Recurrence Component Properties -->
+	<!-- # 3.8.5.1 Exception Date/Times -->
+	<!-- # 3.8.5.2 Recurrence Date/Times -->
+	<!-- # 3.8.5.3 Recurrence Rule -->
+	<xs:complexType name="PropertyRRule">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="recur" type="xcal:ValueRecur"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- # 3.8.6 Alarm Component Properties -->
+	<!-- # 3.8.6.1 Action -->
+	<!-- # 3.8.6.2 Repeat Count -->
+	<!-- # 3.8.6.3 Trigger -->
+	<!-- # 3.8.7 Change Management Component Properties -->
+	<!-- # 3.8.7.1 Date/Time Created -->
+	<xs:complexType name="PropertyCreated">
+		<xs:complexContent>
+			<xs:extension base="xcal:ExtraDateTime"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- # 3.8.7.2 Date/Time Stamp -->
+	<xs:complexType name="PropertyDtstamp">
+		<xs:complexContent>
+			<xs:extension base="xcal:ExtraDateTime"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- # 3.8.7.3 Last Modified -->
+	<xs:complexType name="PropertyLastMod">
+		<xs:complexContent>
+			<xs:extension base="xcal:ExtraDateTime"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- # 3.8.7.4 Sequence Number -->
+	<xs:complexType name="PropertySeq">
+		<xs:complexContent>
+			<xs:extension base="xcal:ExtraInteger"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- # 3.8.8 Miscellaneous Component Properties -->
+	<!-- # 3.8.8.3 Request Status -->
+	<!-- EXTRA: Date or date-time -->
+	<xs:complexType name="ExtraDateOrDateTime">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="tzid" type="xcal:ValueText" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="date" type="xcal:PatternDate"/>
+				<xs:element name="date-time" type="xcal:PatternDateTime"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- EXTRA: Date-time -->
+	<xs:complexType name="ExtraDateTime">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="date-time" type="xcal:PatternDateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- EXTRA: Integer -->
+	<xs:complexType name="ExtraInteger">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="integer" type="xs:integer"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- EXTRA: Text -->
+	<xs:complexType name="ExtraText">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="text" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- EXTRA: Text with language identifier -->
+	<xs:complexType name="ExtraLanguageText">
+		<xs:sequence>
+			<xs:element name="parameters" minOccurs="0">
+				<xs:complexType>
+					<xs:all>
+						<xs:element name="altrep" type="xcal:ValueUri" minOccurs="0"/>
+						<xs:element name="language" type="xcal:ValueText" minOccurs="0"/>
+					</xs:all>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="text" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
