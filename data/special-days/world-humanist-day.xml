@@ -1,0 +1,86 @@
+<!-- World Humanist Day
+
+World Humanist Day is an official day recognized by Humanists International
+and other humanist organizations around the world.
+
+The day is celebrated either by organizing humanist activist or educational
+events, or simply by getting together and having fun.
+
+World Humanist Day occurs annually on 21 June.
+-->
+<vevent xmlns="urn:ietf:params:xml:ns:icalendar-2.0">
+	<properties>
+		<uid>
+			<text>d90c9c45-96fa-42ba-bc3b-4d6c16b52507</text>
+		</uid>
+		<summary>
+			<text>World Humanist Day</text>
+		</summary>
+		<summary>
+			<parameters>
+				<language>
+					<text>fr-CA</text>
+				</language>
+			</parameters>
+			<text>Journée mondiale de l’humanisme</text>
+		</summary>
+		<summary>
+			<parameters>
+				<language>
+					<text>en-CA</text>
+				</language>
+			</parameters>
+			<text>World Humanist Day</text>
+		</summary>
+		<description>
+			<text>https://humanists.international/what-is-humanism/world-humanist-day/</text>
+		</description>
+		<description>
+			<parameters>
+				<language>
+					<text>fr-CA</text>
+				</language>
+			</parameters>
+			<text>https://humanists.international/what-is-humanism/world-humanist-day/</text>
+		</description>
+		<description>
+			<parameters>
+				<language>
+					<text>en-CA</text>
+				</language>
+			</parameters>
+			<text>https://humanists.international/what-is-humanism/world-humanist-day/</text>
+		</description>
+		<dtstart>
+			<date>2000-06-21</date>
+		</dtstart>
+		<duration>
+			<duration>P1D</duration>
+		</duration>
+		<rrule>
+			<recur>
+				<freq>YEARLY</freq>
+			</recur>
+		</rrule>
+		<status>
+			<text>CONFIRMED</text>
+		</status>
+		<transp>
+			<text>TRANSPARENT</text>
+		</transp>
+		<created>
+			<date-time>2017-08-14T19:50:38Z</date-time>
+		</created>
+		<last-modified>
+			<date-time>2017-08-14T19:50:38Z</date-time>
+		</last-modified>
+		<!-- Increment to signal updates
+		<sequence>
+			<integer>0</integer>
+		</sequence>
+		-->
+		<dtstamp>
+			<date-time>2017-08-14T19:50:38Z</date-time>
+		</dtstamp>
+	</properties>
+</vevent>
